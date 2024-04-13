@@ -17,7 +17,7 @@ export default function AnswerItem({answer, handleSelectedAnswer, questionId}: A
   return (
       <Flex justify={"space-between"}>
         <Flex vertical={false} style={{paddingBottom: 15}}>
-          <Paragraph>{answer.id}) </Paragraph>
+          <Paragraph><b>{answer.id})&nbsp;&nbsp;&nbsp;</b></Paragraph>
           <Paragraph>{answer.answer}</Paragraph>
         </Flex>
         <Switch style={{color: 'green'}} value={answer.isSelected} onClick={selectAnswer}/>
