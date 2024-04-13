@@ -10,6 +10,7 @@ interface QuestionCardProps {
   question: Question
   index: number
 }
+
 export default function QuestionCard({question, index}: QuestionCardProps) {
 
   const setActiveExam = useSetRecoilState(activeExamState);
@@ -64,13 +65,11 @@ export default function QuestionCard({question, index}: QuestionCardProps) {
       <Card style={{width: '90%', maxHeight: '90%'}} title={question.question}>
         {question.code &&
             <span style={{textAlign: "left"}}>
-              {/*<Flex style={{maxHeight: '10%', margin: 10, textAlign: "left"}}>*/}
                 <pre>
                   <code>
                     <b style={{fontSize: 12}}>{question.code}</b>
                   </code>
                 </pre>
-              {/*</Flex>*/}
               <Divider/>
             </span>
         }
