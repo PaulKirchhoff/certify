@@ -10,18 +10,18 @@ export interface QuestionState {
 
 export interface ActiveExamState {
   examId?: string,
+  examTitle: string,
   questionStates?: QuestionState[],
   currentQuestionId?: string
-  timer?: number
 }
 
 export const activeExamState: RecoilState<ActiveExamState> = atom({
   key: 'ActiveExam',
   default: {
     examId: '',
+    examTitle: '',
     questionStates: [] as QuestionState[],
     currentQuestionId: '',
-    timer: 0
   } as ActiveExamState,
   effects_UNSTABLE: [persistAtom]
 })
