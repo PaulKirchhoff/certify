@@ -5,6 +5,7 @@ import {loader as activeExamLoader} from "../pages/ActiveExam";
 import ExamDetails from "../pages/ExamDetails";
 import App from "../App";
 import ActiveExam from "../pages/ActiveExam";
+import ExamResult from "../pages/ExamResult";
 
 export const router = createBrowserRouter([
   {
@@ -25,7 +26,13 @@ export const router = createBrowserRouter([
         path: '/exams/exam/:examId/start',
         loader: activeExamLoader,
         element: <ActiveExam/>
+      },
+      {
+        path: '/exams/exam/result',
+        loader: activeExamLoader,
+        element: <ExamResult/>
       }
+
     ]
   },
 ]);

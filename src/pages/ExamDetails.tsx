@@ -3,6 +3,7 @@ import {useLoaderData, useNavigate} from "react-router-dom";
 import {Exams, Exam} from "../domain/exam/types/Exams";
 import {useSetRecoilState} from "recoil";
 import {activeExamState} from "../domain/exam/store/ActiveExamStore";
+import {examTimerState} from "../domain/exam/store/ExamTimerStore";
 
 export async function loader({params}: any) {
   const exam: Exam = Exams.filter((e) => e.id === params.examId)[0];
@@ -14,9 +15,11 @@ export default function ExamDetails() {
   const {exam} = useLoaderData() as { exam: Exam};
 
   const setActiveExam = useSetRecoilState(activeExamState);
+  const setExamTimer = useSetRecoilState(examTimerState);
 
   const startExam = () => {
-    setActiveExam({examId: exam.id, questionStates: [], timer: exam.time});
+    setActiveExam({examId: exam.id, examTitle: exam.title, questionStates: []});
+    setExamTimer({timer: exam.time})
     resetExam();
     navigate('start')
   }

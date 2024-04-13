@@ -1,9 +1,9 @@
-import {Card, List} from "antd";
+import {Card, Divider, List} from "antd";
 import {Question} from "../types/Question";
 import {Answer} from "../types/Answer";
 import AnswerItem from "./AnswerItem";
 import {useRecoilValue, useSetRecoilState} from "recoil";
-import {ActiveExamState, activeExamState, QuestionState} from "../store/ActiveExamStore";
+import {activeExamState, QuestionState} from "../store/ActiveExamStore";
 import {useEffect, useState} from "react";
 
 interface QuestionCardProps {
@@ -29,7 +29,7 @@ export default function QuestionCard({question, index}: QuestionCardProps) {
     setActiveExam({
       ...activeExam,
       questionStates: [
-          ...activeExam.questionStates?.filter((q) => q.questionId !== question.id) || [],
+        ...activeExam.questionStates?.filter((q) => q.questionId !== question.id) || [],
         {
           questionId: question.id,
           givenAnswerIds: localSelectedAnswers
@@ -56,12 +56,25 @@ export default function QuestionCard({question, index}: QuestionCardProps) {
   }
 
   const renderAnswers = (answer: Answer) => {
-    return <AnswerItem answer={answer} handleSelectedAnswer={handleSelectedAnswers} questionId={question.id}/>
+    return <AnswerItem key={answer.id} answer={answer} handleSelectedAnswer={handleSelectedAnswers}
+                       questionId={question.id}/>
   }
 
   return (
-      <Card style={{width: '90%', height: '90%'}}  title={question.question}>
-        <List renderItem={renderAnswers} dataSource={question.answers} />
+      <Card style={{width: '90%', maxHeight: '90%'}} title={question.question}>
+        {question.code &&
+            <span style={{textAlign: "left"}}>
+              {/*<Flex style={{maxHeight: '10%', margin: 10, textAlign: "left"}}>*/}
+                <pre>
+                  <code>
+                    <b style={{fontSize: 12}}>{question.code}</b>
+                  </code>
+                </pre>
+              {/*</Flex>*/}
+              <Divider/>
+            </span>
+        }
+        <List renderItem={renderAnswers} dataSource={question.answers}/>
       </Card>
   )
 }

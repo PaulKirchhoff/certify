@@ -1,5 +1,6 @@
 import {Button, Flex} from "antd";
-import {FaArrowCircleLeft, FaArrowCircleRight} from "react-icons/fa";
+import {FaArrowCircleLeft, FaArrowCircleRight, FaFlagCheckered} from "react-icons/fa";
+import {useNavigate} from "react-router-dom";
 
 interface ExamNavigationButtonPanelProps {
   questionIndex: number
@@ -15,12 +16,18 @@ export default function ExamNavigationButtonPanel({
                                                     children
                                                   }: ExamNavigationButtonPanelProps) {
 
+  const navigate = useNavigate();
+
   const setNextIndex = () => {
     setQuestionIndex(questionIndex + 1);
   }
 
   const setPreviousIndex = () => {
     setQuestionIndex(questionIndex - 1);
+  }
+
+  const finishExam = () => {
+    navigate('/exams/exam/result')
   }
 
   return (
@@ -31,6 +38,9 @@ export default function ExamNavigationButtonPanel({
         {children}
         <Button disabled={questionIndex === questionsLength - 1} type={"text"}>
           <FaArrowCircleRight size={25} onClick={setNextIndex}/>
+        </Button>
+        <Button style={{display: "flex", alignSelf: "center"}} type={"primary"} color={'red'} onClick={finishExam}>
+          <FaFlagCheckered color={'white'} size={20}/>
         </Button>
       </Flex>
   )

@@ -1,7 +1,8 @@
 import {Progress} from "antd";
 import {useEffect, useState} from "react";
 import {useRecoilState} from "recoil";
-import {activeExamState} from "../store/ActiveExamStore";
+import {useNavigate} from "react-router-dom";
+import {examTimerState} from "../store/ExamTimerStore";
 
 interface TimerProps {
   time: number
@@ -9,18 +10,27 @@ interface TimerProps {
 
 export default function Timer({time}: TimerProps) {
 
-  const [activeExam, setActiveExam] = useRecoilState(activeExamState);
+  const navigate = useNavigate();
 
-  const [timer, setTimer] = useState(activeExam.timer! * 60);
-  const [percent, setPercent] = useState((activeExam.timer! / (time * 60)) * 100);
+  const [examTimer, setExamTimer] = useRecoilState(examTimerState);
+
+  const [timer, setTimer] = useState(examTimer.timer! * 60);
+  const [percent, setPercent] = useState((examTimer.timer! / (time * 60)) * 100);
 
   useEffect(() => {
+    if (timer > 0)
     setTimeout(() => {
       setTimer(timer - 1)
-      setActiveExam({...activeExam, timer: timer / 60})
+      setExamTimer({...examTimer, timer: timer /60})
       setPercent(parseFloat(((timer / (time * 60)) * 100).toFixed(2)))
     }, 1000)
   });
+
+  useEffect(() => {
+    if (examTimer.timer && examTimer.timer < 0.02) {
+      navigate('/exams/exam/result');
+    }
+  }, [examTimer.timer]);
 
   const calculateTimeString = (): string => {
     const totalSeconds = timer;
@@ -37,7 +47,6 @@ export default function Timer({time}: TimerProps) {
       <div style={{
         display: "flex",
         flexDirection: "column",
-        alignContent: "center",
         width: '100%',
       }}>
         <h5>{calculateTimeString()}</h5>
