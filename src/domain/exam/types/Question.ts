@@ -8,6 +8,7 @@ export enum QuestionType {
 export interface Question {
   id: string,
   question: string,
+  code?: string,
   type: QuestionType
   points: number,
   answers: Answer[]
