@@ -17,7 +17,7 @@ export default function Header() {
         {location.pathname !== '/' && <FaArrowAltCircleLeft size={30} color={'#414141'} onClick={navigateBack}/>}
         <Flex vertical={true} flex={"auto"}>
           <Flex vertical={false} justify={"flex-end"} align={"center"}>
-            <h2 style={{color: '#414141'}}>Certify</h2>
+            <h2 style={{color: '#414141'}}>Certify&nbsp;&nbsp;</h2>
             <FaBrain color={'#414141'} size={30}/>
           </Flex>
         </Flex>
