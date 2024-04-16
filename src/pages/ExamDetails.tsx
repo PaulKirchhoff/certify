@@ -1,9 +1,10 @@
 import {Button, Card, Divider, Flex} from "antd";
-import {useLoaderData, useNavigate} from "react-router-dom";
+import {NavigateFunction, useLoaderData, useNavigate} from "react-router-dom";
 import {Exams, Exam} from "../domain/exam/types/Exams";
-import {useSetRecoilState} from "recoil";
-import {activeExamState} from "../domain/exam/store/ActiveExamStore";
-import {examTimerState} from "../domain/exam/store/ExamTimerStore";
+import {SetterOrUpdater, useSetRecoilState} from "recoil";
+import {ActiveExamState, activeExamState} from "../domain/exam/store/ActiveExamStore";
+import {ExamTimerState, examTimerState} from "../domain/exam/store/ExamTimerStore";
+import {SelectedAnswer, selectedAnswersState} from "../domain/exam/store/SelectedAnswersStore";
 
 export async function loader({params}: any) {
   const exam: Exam = Exams.filter((e) => e.id === params.examId)[0];
@@ -11,14 +12,16 @@ export async function loader({params}: any) {
 }
 
 export default function ExamDetails() {
-  const navigate = useNavigate();
+  const navigate: NavigateFunction = useNavigate();
   const {exam} = useLoaderData() as { exam: Exam};
 
-  const setActiveExam = useSetRecoilState(activeExamState);
-  const setExamTimer = useSetRecoilState(examTimerState);
+  const setActiveExam: SetterOrUpdater<ActiveExamState> = useSetRecoilState(activeExamState);
+  const setExamTimer: SetterOrUpdater<ExamTimerState> = useSetRecoilState(examTimerState);
+  const setSelectedAnswers: SetterOrUpdater<SelectedAnswer[]> = useSetRecoilState(selectedAnswersState);
 
   const startExam = () => {
-    setActiveExam({examId: exam.id, examTitle: exam.title, questionStates: []});
+    setActiveExam({examId: exam.id, examTitle: exam.title});
+    setSelectedAnswers([]);
     setExamTimer({timer: exam.time})
     resetExam();
     navigate('start')

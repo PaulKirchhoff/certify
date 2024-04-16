@@ -24,7 +24,7 @@ export default function ActiveExam() {
 
   return (
       <Flex vertical={true} justify={"space-between"} align={"center"} style={{height: '85vh'}}>
-        <QuestionCard question={activeQuestion} index={questionIndex}/>
+        <QuestionCard question={activeQuestion}/>
         <ExamNavigationButtonPanel
             questionIndex={questionIndex}
             setQuestionIndex={setQuestionIndex}

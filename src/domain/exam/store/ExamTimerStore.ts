@@ -3,7 +3,7 @@ import {recoilPersist} from "recoil-persist";
 
 const {persistAtom} = recoilPersist({key: 'examTimer'});
 
-interface ExamTimerState {
+export interface ExamTimerState {
   timer: number
 }
 export const examTimerState: RecoilState<ExamTimerState> = atom({
