@@ -24,6 +24,7 @@ export default function QuestionCard({question}: QuestionCardProps) {
     if (selectedAnswers.filter((sa: SelectedAnswer) => sa.questionId === question.id).length === 0) {
       createNewSelectedAnswer();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [question]);
 
   useEffect(() => {
@@ -34,6 +35,7 @@ export default function QuestionCard({question}: QuestionCardProps) {
         selectedAnswers: tempSelectedAnswers
       }
     ])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [tempSelectedAnswers]);
 
   const createNewSelectedAnswer = () => {
