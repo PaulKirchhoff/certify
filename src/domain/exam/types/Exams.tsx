@@ -26,8 +26,9 @@ export const Exams: Exam[] = [
       {
         id: '1',
         question: 'What is the purpose of this hook?',
+        category: 'Hooks',
         code: 'useEffect(() => {\n' +
-            ' document. title = `You clicked ${count} times`;\n' +
+            '   document. title = `You clicked ${count} times`;\n' +
             '3, [count]);)',
         type: QuestionType.MULTIPLE_CHOICE,
         points: 1,
@@ -65,6 +66,7 @@ export const Exams: Exam[] = [
       {
         id: '2',
         question: 'What name is given to form elements that have their internal state synchronized with the state of their parent React component?',
+        category: 'Forms',
         type: QuestionType.MULTIPLE_CHOICE,
         points: 1,
         answers: [
@@ -101,16 +103,15 @@ export const Exams: Exam[] = [
       {
         id: '3',
         question: 'What would happen if we run the tick function 10 times consecutively?',
+        category: 'Basics',
         code: 'function tick {\n' +
-            'const element = (\n' +
-            '‹div>\n' +
-            '<h1>Hello, world!</h1>\n' +
-            '<h2>It is {new Date().toLocaleTimeString}.</h2>\n' +
-            '</ div>\n' +
-            ');\n' +
-            'ReactD0M. render(\n' +
-            'element, document.getElementById(\'root\')\n' +
-            ');\n' +
+            '  const element = (\n' +
+            '     <div>\n' +
+            '       <h1>Hello, world!</h1>\n' +
+            '       <h2>It is {new Date().toLocaleTimeString}.</h2>\n' +
+            '     </div>\n' +
+            '  );\n' +
+            '  ReactD0M.render(element, document.getElementById(\'root\'));\n' +
             '}',
         type: QuestionType.MULTIPLE_CHOICE,
         points: 1,
@@ -148,6 +149,7 @@ export const Exams: Exam[] = [
       {
         id: '4',
         question: 'What is the purpose of the className attribute in JSX?',
+        category: 'JSX',
         type: QuestionType.MULTIPLE_CHOICE,
         points: 1,
         answers: [
@@ -184,6 +186,7 @@ export const Exams: Exam[] = [
       {
         id: '5',
         question: 'Which React hook is used to manage component state?',
+        category: 'Hooks',
         type: QuestionType.MULTIPLE_CHOICE,
         points: 1,
         answers: [
@@ -220,6 +223,7 @@ export const Exams: Exam[] = [
       {
         id: '6',
         question: 'What is the correct syntax to listen to a click event in a component and call a doSomething function when the click happens:',
+        category: 'Components',
         type: QuestionType.MULTIPLE_CHOICE,
         points: 1,
         answers: [
@@ -256,6 +260,7 @@ export const Exams: Exam[] = [
       {
         id: '7',
         question: 'We want to update the price of an item by applying a discount to it. The price of that item is stored in the state of a component, and the discount value is passed to the component as a prop. What is the proper way to apply a discount to the price?',
+        category: 'State',
         type: QuestionType.MULTIPLE_CHOICE,
         points: 1,
         answers: [
@@ -299,6 +304,7 @@ export const Exams: Exam[] = [
       {
         id: '8',
         question: 'Is there anything wrong with the following JSX syntax?',
+        category: 'Components',
         code: '‹button onClick={extendDate} disabled={selection.isEmpty)}>\n' +
             'Extend date for selection </button>',
         type: QuestionType.MULTIPLE_CHOICE,
@@ -337,6 +343,7 @@ export const Exams: Exam[] = [
       {
         id: '9',
         question: 'In a functional component, when is the useEffect hook called for the first time?',
+        category: 'Hooks',
         type: QuestionType.MULTIPLE_CHOICE,
         points: 1,
         answers: [
@@ -373,6 +380,7 @@ export const Exams: Exam[] = [
       {
         id: '10',
         question: 'What method does a class component have to define?',
+        category: 'Components',
         type: QuestionType.MULTIPLE_CHOICE,
         points: 1,
         answers: [

@@ -11,5 +11,6 @@ export interface Question {
   code?: string,
   type: QuestionType
   points: number,
-  answers: Answer[]
+  answers: Answer[],
+  category?: string | 'Other'
 }
