@@ -14,7 +14,7 @@ export async function loader({params}: any) {
 export default function ActiveExam() {
 
   const {exam} = useLoaderData() as {exam: Exam};
-  const activeExam = useRecoilValue<ActiveExamState>(activeExamState);
+  const activeExam: ActiveExamState = useRecoilValue<ActiveExamState>(activeExamState);
 
   return (
       <Flex vertical={true} justify={"space-between"} align={"center"} style={{height: '85vh'}}>
