@@ -13,22 +13,17 @@ export async function loader({params}: any) {
 
 export default function ExamDetails() {
   const navigate: NavigateFunction = useNavigate();
-  const {exam} = useLoaderData() as { exam: Exam};
+  const {exam} = useLoaderData() as { exam: Exam };
 
   const setActiveExam: SetterOrUpdater<ActiveExamState> = useSetRecoilState(activeExamState);
   const setExamTimer: SetterOrUpdater<ExamTimerState> = useSetRecoilState(examTimerState);
   const setSelectedAnswers: SetterOrUpdater<SelectedAnswer[]> = useSetRecoilState(selectedAnswersState);
 
   const startExam = () => {
-    setActiveExam({examId: exam.id, examTitle: exam.title});
+    setActiveExam({examId: exam.id, examTitle: exam.title, currentQuestionIndex: 0, questions: exam.questions});
     setSelectedAnswers([]);
     setExamTimer({timer: exam.time})
-    resetExam();
     navigate('start')
-  }
-
-  const resetExam = () => {
-    exam.questions.forEach((q) => q.answers.forEach((a) => a.isSelected = false));
   }
 
   return (

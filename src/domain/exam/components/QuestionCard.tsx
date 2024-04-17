@@ -1,11 +1,10 @@
-import {Card, Divider, List} from "antd";
+import {Card, Divider, Flex, List} from "antd";
 import {Question} from "../types/Question";
 import {Answer} from "../types/Answer";
 import AnswerItem from "./AnswerItem";
-import {useRecoilState} from "recoil";
-import {activeExamState} from "../store/ActiveExamStore";
-import {useEffect, useState} from "react";
-import {SelectedAnswer, selectedAnswersState} from "../store/SelectedAnswersStore";
+import {useRecoilValue} from "recoil";
+import {ActiveExamState, activeExamState} from "../store/ActiveExamStore";
+import QuestionCardTitle from "./QuestionCardTitle";
 
 interface QuestionCardProps {
   question: Question
@@ -13,69 +12,31 @@ interface QuestionCardProps {
 
 export default function QuestionCard({question}: QuestionCardProps) {
 
-  const [activeExam, setActiveExam] = useRecoilState(activeExamState);
-  const [selectedAnswers, setSelectedAnswers] = useRecoilState(selectedAnswersState);
-
-  const [tempSelectedAnswers, setTempSelectedAnswers] = useState<string[]>([]);
-
-  useEffect(() => {
-    setTempSelectedAnswers(selectedAnswers?.find((sa: SelectedAnswer) => sa.questionId === question.id)?.selectedAnswers || []);
-    setActiveExam({...activeExam, currentQuestionId: question.id});
-    if (selectedAnswers.filter((sa: SelectedAnswer) => sa.questionId === question.id).length === 0) {
-      createNewSelectedAnswer();
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [question]);
-
-  useEffect(() => {
-    setSelectedAnswers([
-      ...selectedAnswers.filter((sa: SelectedAnswer) => sa.questionId !== question.id) || [],
-      {
-        questionId: question.id,
-        selectedAnswers: tempSelectedAnswers
-      }
-    ])
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [tempSelectedAnswers]);
-
-  const createNewSelectedAnswer = () => {
-    const selectedAnswerTemp: SelectedAnswer = {
-      questionId: question.id,
-      selectedAnswers: []
-    };
-    setSelectedAnswers([...selectedAnswers, selectedAnswerTemp])
-  }
-
-  const handleTempSelectedAnswers = (answerId: string) => {
-    if (tempSelectedAnswers.find((id: string) => id === answerId)) {
-      setTempSelectedAnswers(tempSelectedAnswers.filter((id: string) => answerId !== id));
-    } else {
-      setTempSelectedAnswers([...tempSelectedAnswers, answerId]);
-    }
-  }
+  const activeExam: ActiveExamState = useRecoilValue<ActiveExamState>(activeExamState);
 
   const renderAnswers = (answer: Answer) => {
-    return <AnswerItem
-        key={answer.id}
-        answer={answer}
-        handleSelectedAnswer={handleTempSelectedAnswers}
-        questionId={question.id}
-    />
+    return <AnswerItem key={answer.id} answer={answer}/>
   }
 
   return (
-      <Card style={{width: '90%', maxHeight: '90%'}} title={question.question}>
+      <Card style={{width: '90%', maxHeight: '90%'}}
+            title={<QuestionCardTitle/>}
+      >
+        <Flex vertical={true} justify={"space-between"}>
+          <h4 style={{textAlign: "left"}}>{activeExam.questions[activeExam.currentQuestionIndex].question}</h4>
+        </Flex>
+        <Divider/>
         {question.code &&
             <span style={{textAlign: "left"}}>
                 <pre>
                   <code>
-                    <b style={{fontSize: 12}}>{question.code}</b>
+                    <b style={{fontSize: 12}}>{activeExam.questions[activeExam.currentQuestionIndex].code}</b>
                   </code>
                 </pre>
               <Divider/>
             </span>
         }
-        <List renderItem={renderAnswers} dataSource={question.answers}/>
+        <List renderItem={renderAnswers} dataSource={activeExam.questions[activeExam.currentQuestionIndex].answers}/>
       </Card>
   )
 }
