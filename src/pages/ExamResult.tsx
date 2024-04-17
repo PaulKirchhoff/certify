@@ -5,7 +5,12 @@ import {useEffect, useState} from "react";
 import {Exam, Exams} from "../domain/exam/types/Exams";
 import {SelectedAnswer, selectedAnswersState} from "../domain/exam/store/SelectedAnswersStore";
 import {isEqual} from 'lodash';
-import {getCorrectAnswersFromExam, getSelectedAnswers} from "../domain/result/services/ResultService";
+import {
+  calculateProRataPercentage,
+  getCorrectAnswersFromExam,
+  getQuestionsByCategory,
+  getSelectedAnswers
+} from "../domain/result/services/ResultService";
 
 export default function ExamResult() {
 
@@ -21,8 +26,13 @@ export default function ExamResult() {
   useEffect(() => {
     const exam: Exam | undefined = Exams.find((e: Exam) => e.id === activeExam.examId);
     if (exam) {
+      const examQuestions: any = getQuestionsByCategory(exam.questions)
+      const activeExamQuestions: any = getQuestionsByCategory(activeExam.questions);
+      calculateProRataPercentage(examQuestions, exam.questions.length)
+      console.log("Exam", examQuestions)
+      console.log("ActiveExam", examQuestions)
       setCurrentExam(exam);
-      calculateSuccess(exam);
+      // calculateSuccess(exam);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [correctAnswersCount]);
