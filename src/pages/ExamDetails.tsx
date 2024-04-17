@@ -7,7 +7,7 @@ import {ExamTimerState, examTimerState} from "../domain/exam/store/ExamTimerStor
 import {SelectedAnswer, selectedAnswersState} from "../domain/exam/store/SelectedAnswersStore";
 
 export async function loader({params}: any) {
-  const exam: Exam = Exams.filter((e) => e.id === params.examId)[0];
+  const exam: Exam = Exams.filter((e: Exam) => e.id === params.examId)[0];
   return {exam}
 }
 
