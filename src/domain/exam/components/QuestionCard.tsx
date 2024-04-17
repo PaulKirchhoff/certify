@@ -5,6 +5,7 @@ import AnswerItem from "./AnswerItem";
 import {useRecoilValue} from "recoil";
 import {ActiveExamState, activeExamState} from "../store/ActiveExamStore";
 import QuestionCardTitle from "./QuestionCardTitle";
+import {CodeBlock} from "react-code-blocks";
 
 interface QuestionCardProps {
   question: Question
@@ -19,7 +20,10 @@ export default function QuestionCard({question}: QuestionCardProps) {
   }
 
   return (
-      <Card style={{width: '90%', maxHeight: '90%'}}
+      <Card style={{
+        width: '90%',
+        // maxHeight: '90%'
+      }}
             title={<QuestionCardTitle/>}
       >
         <Flex vertical={true} justify={"space-between"}>
@@ -27,14 +31,16 @@ export default function QuestionCard({question}: QuestionCardProps) {
         </Flex>
         <Divider/>
         {question.code &&
-            <span style={{textAlign: "left"}}>
-                <pre>
-                  <code>
-                    <b style={{fontSize: 12}}>{activeExam.questions[activeExam.currentQuestionIndex].code}</b>
-                  </code>
-                </pre>
+            <Flex vertical={true}>
+              <CodeBlock
+                  codeContainerStyle={{textAlign: 'left'}}
+                  customStyle={{width: '100%'}}
+                  text={question.code}
+                  language={'jsx'}
+                  showLineNumbers={true}
+              />
               <Divider/>
-            </span>
+            </Flex>
         }
         <List renderItem={renderAnswers} dataSource={activeExam.questions[activeExam.currentQuestionIndex].answers}/>
       </Card>
