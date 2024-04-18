@@ -1,5 +1,4 @@
 import {Card, Divider, Flex, List} from "antd";
-import {Question} from "../types/Question";
 import {Answer} from "../types/Answer";
 import AnswerItem from "./AnswerItem";
 import {useRecoilValue} from "recoil";
@@ -7,11 +6,7 @@ import {ActiveExamState, activeExamState} from "../store/ActiveExamStore";
 import QuestionCardTitle from "./QuestionCardTitle";
 import {CodeBlock} from "react-code-blocks";
 
-interface QuestionCardProps {
-  question: Question
-}
-
-export default function QuestionCard({question}: QuestionCardProps) {
+export default function QuestionCard() {
 
   const activeExam: ActiveExamState = useRecoilValue<ActiveExamState>(activeExamState);
 
@@ -30,12 +25,12 @@ export default function QuestionCard({question}: QuestionCardProps) {
           <h4 style={{textAlign: "left"}}>{activeExam.questions[activeExam.currentQuestionIndex].question}</h4>
         </Flex>
         <Divider/>
-        {question.code &&
+        {activeExam.questions[activeExam.currentQuestionIndex].code &&
             <Flex vertical={true}>
               <CodeBlock
                   codeContainerStyle={{textAlign: 'left'}}
                   customStyle={{width: '100%'}}
-                  text={question.code}
+                  text={activeExam.questions[activeExam.currentQuestionIndex].code}
                   language={'jsx'}
                   showLineNumbers={true}
               />
