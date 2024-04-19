@@ -19,17 +19,18 @@ export default function Timer({time}: TimerProps) {
 
   useEffect(() => {
     if (timer > 0)
-    setTimeout(() => {
-      setTimer(timer - 1)
-      setExamTimer({...examTimer, timer: timer /60})
-      setPercent(parseFloat(((timer / (time * 60)) * 100).toFixed(2)))
-    }, 1000)
+      setTimeout(() => {
+        setTimer(timer - 1)
+        setExamTimer({...examTimer, timer: timer / 60})
+        setPercent(parseFloat(((timer / (time * 60)) * 100).toFixed(2)))
+      }, 1000)
   });
 
   useEffect(() => {
     if (examTimer.timer && examTimer.timer < 0.02) {
-      navigate('/exams/exam/result');
+      navigate('/exams/exam/result', {replace: true});
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [examTimer.timer]);
 
   const calculateTimeString = (): string => {

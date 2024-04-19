@@ -22,7 +22,7 @@ export default function ExamNavigationButtonPanel({children}: ExamNavigationButt
   }
 
   const finishExam = () => {
-    navigate('/exams/exam/result')
+    navigate('/exams/exam/result', {replace: true})
   }
 
   return (
