@@ -11,13 +11,13 @@ export default function ExamResult() {
   const activeExam = useRecoilValue(activeExamState);
 
   const [currentExam, setCurrentExam] = useState<Exam | null>(null);
-  const [minPassingScorePercentage, setminPassingScorePercentage] = useState(0);
+  const [minPassingScorePercentage, setMinPassingScorePercentage] = useState(0);
 
   useEffect(() => {
     const exam: Exam | undefined = Exams.find((e: Exam) => e.id === activeExam.examId);
     if (exam) {
       setCurrentExam(exam);
-      setminPassingScorePercentage((exam.passingScore / exam.questions.length) * 100)
+      setMinPassingScorePercentage((exam.passingScore / exam.questions.length) * 100)
     }
   }, [activeExam.examId]);
 
