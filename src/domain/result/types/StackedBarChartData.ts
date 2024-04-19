@@ -1,5 +1,5 @@
 export interface StackedBarChartData {
-  name: string,
+  category: string,
   wrong: number,
   correct: number
 }
