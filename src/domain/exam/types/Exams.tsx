@@ -18,7 +18,7 @@ export const Exams: Exam[] = [
     title: 'React Level 1',
     description: 'Level 1 React certification, for beginners.',
     time: 25,
-    passingScore: 40,
+    passingScore: 7,
     path: 'exam/1',
     color: '#faf304',
     icon: <FaReact size={80} />,
