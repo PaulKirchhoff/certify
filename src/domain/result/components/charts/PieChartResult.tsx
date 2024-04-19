@@ -90,8 +90,8 @@ export default function PieChartResult({data}: PieChartResultProps) {
   );
 
   return (
-      <Card>
-        <PieChart width={450} height={450}>
+      <Card style={{display: 'flex', flexDirection: "column", alignItems: "center"}}>
+        <PieChart width={400} height={400} >
           <Pie
               activeIndex={activeIndex}
               activeShape={renderActiveShape}
