@@ -19,12 +19,6 @@ export default function ExamOverviewCard({exam}: ExamOverviewCardProps) {
         <Card
             hoverable
             onClick={navigateToExam}
-            bodyStyle={{
-              display: "flex",
-              flexDirection: "column",
-              justifyContent: "center",
-              alignItems: "center",
-            }}
             style={{
               background: exam.color,
               margin: 5
