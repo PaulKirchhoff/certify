@@ -21,8 +21,7 @@ export default function AnswerItem({answer}: AnswerItemProps) {
     }
 
     // get index from answer for splice
-    const answerIndex = activeExam.questions[activeExam.currentQuestionIndex].answers.findIndex((a) => a.id === answer.id)
-
+    const answerIndex: number = activeExam.questions[activeExam.currentQuestionIndex].answers.findIndex((a: Answer) => a.id === answer.id)
     // create temporary question for splice
     const tempQuestion: Question = {
       ...activeExam.questions[activeExam.currentQuestionIndex],
@@ -31,7 +30,7 @@ export default function AnswerItem({answer}: AnswerItemProps) {
     tempQuestion.answers.splice(answerIndex, 1, tempAnswer);
 
     // get question index for splice
-    const questionIndex = activeExam.questions.findIndex((q) => q.id === answer.questionId);
+    const questionIndex: number = activeExam.questions.findIndex((q) => q.id === answer.questionId);
 
     // create temporary questions array for splice
     const tempQuestions: Question[] = [...activeExam.questions];
