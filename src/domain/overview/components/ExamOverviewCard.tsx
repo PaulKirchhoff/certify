@@ -1,4 +1,4 @@
-import {Button, Card, Col} from "antd";
+import {Card, Col} from "antd";
 import {useNavigate} from "react-router-dom";
 import {Exam} from "../../exam/types/Exams";
 
@@ -15,13 +15,13 @@ export default function ExamOverviewCard({exam}: ExamOverviewCardProps) {
   }
 
   return (
-      <Col className="gutter-row" span={8}>
+      <Col span={8}>
         <Card
             hoverable
             onClick={navigateToExam}
             style={{
               background: exam.color,
-              margin: 5
+              margin: 5,
             }}>
           {exam.icon}
           <h3>{exam.title}</h3>
