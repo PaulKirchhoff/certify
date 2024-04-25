@@ -1,5 +1,5 @@
 import {Question, QuestionType} from "./Question"
-import {FaAngular, FaReact} from "react-icons/fa";
+import {FaReact} from "react-icons/fa";
 
 export interface Exam {
   id: string,
@@ -1970,23 +1970,6 @@ export const Exams: Exam[] = [
           },
         ]
       }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     ]
   }
 ]
