@@ -18,12 +18,14 @@ export default function Timer({time}: TimerProps) {
   const [percent, setPercent] = useState((examTimerValue! / (time * 60)) * 100);
 
   useEffect(() => {
-    if (timer > 0)
-      setTimeout(() => {
+    if (timer > 0) {
+      const intervalId = setInterval(() => {
         setTimer(timer - 1)
         setExamTimerValue(timer / 60)
         setPercent(parseFloat(((timer / (time * 60)) * 100).toFixed(2)))
-      }, 1000)
+      }, 1000);
+      return () =>  clearInterval(intervalId);
+    }
   });
 
   useEffect(() => {
