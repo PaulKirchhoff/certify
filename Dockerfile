@@ -1,5 +1,5 @@
 # use an official Node runtime as a parent image
-FROM node:22
+FROM node:22.10
 LABEL authors="paulkirchhoff"
 
 # Set the working directory to /app
